@@ -23,5 +23,4 @@ urlpatterns = [
     re_path(r'^courses/', include(('courses.urls', 'courses'), namespace='courses')),
     re_path(r'^orgs/', include(('orgs.urls', 'orgs'), namespace='orgs')),
     re_path(r'^operations/', include(('operations.urls', 'operations'), namespace='operations'))
-
 ]
