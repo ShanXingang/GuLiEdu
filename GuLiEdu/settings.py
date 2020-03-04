@@ -18,6 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 由于把所有app都放在了apps目录里，且设置apps为SourcesRoot
 # 要让程序能找到这个路径，所以需要将其路径加入python路径中
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -42,10 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'courses',
-    'users',
-    'orgs',
-    'operations'
+    'users.apps.UsersConfig',
+    'orgs.apps.OrgsConfig',
+    'courses.apps.CoursesConfig',
+    'operations.apps.OperationsConfig', # 换一个注册方式
+    'xadmin',
+    'crispy_forms',
+    'reversion',
 ]
 AUTH_USER_MODEL = 'users.UserProfile'
 

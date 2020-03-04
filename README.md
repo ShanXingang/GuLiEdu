@@ -32,10 +32,10 @@
 
 ##### 1、创建Django项目
 
-首先需要安装django库
+首先需要安装django库。（最新版本是diango3，但是大部分教程都是根据django2来写的，并且xadmin对django2很友好，所以用django2来写）
 
 ```python3
-pip install django
+pip install django=2
 ```
 
 完成之后，进入你要创建的项目路径，在命令框中输入命令创建django项目
@@ -551,3 +551,67 @@ python manage.py migrate
 ```
 
 运行完了之后，在数据库中可以看到表创建成功了。
+
+#### 三、安装xadmin
+
+对于xadmin，在pip中install一般找不到这样的库，这是因为我们安装xadmin一般都是直接把它的源码当做extar_app放进去的，这样的话，就可以更灵活地使用插件等功能。
+
+##### 1、安装xadmin
+
+在项目根目录下新建extra_apps目录
+
+下载xadmin源码[https://github.com/sshwsfc/xadmin](https://github.com/sshwsfc/xadmin/tree/django2) 后解析，将其中的xadmin文件夹复制到extra_apps目录中
+
+然后将extra_apps变成sources root，同理需要在settings.py中将其添加到python路径中。
+
+```
+sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))
+```
+
+##### 2、配置参数
+
+由于我们是把xadmin当做额外的app模块放入项目中的，所以需要在settings.py中进行注册。
+
+```
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'courses',
+    'users',
+    'orgs',
+    'operations',
+    'xadmin' # 新添加
+]
+```
+
+另外，xadmin有自己的一套UI，它的链接也不一样，所以要在urls.py中修改路由，指向xadmin
+
+```
+urlpatterns = [
+    # path('admin/', admin.site.urls),
+    path('xadmin/',xadmin.site.urls),
+    re_path(r'^users/', include(('users.urls', 'users'), namespace='users')),
+    re_path(r'^courses/', include(('courses.urls', 'courses'), namespace='courses')),
+    re_path(r'^orgs/', include(('orgs.urls', 'orgs'), namespace='orgs')),
+    re_path(r'^operations/', include(('operations.urls', 'operations'), namespace='operations'))
+]
+```
+
+这个时候xadmin其实已经安装好了，但是运行的时候会报错，因为一些依赖库还没有安装。所以需要先进行安装
+
+```
+django-crispy-forms
+django-import-export
+django-reversion
+django-formtools
+future
+httplib2
+six
+```
+
+
+

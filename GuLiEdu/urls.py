@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+import xadmin
 
 # 使用include的目的是为了使代码整洁，当有users开头的请求来访问，我们把它转到users模块中去分发，在users模块里面也有一个urlpatterns对请求进行处理
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
+    path('xadmin/',xadmin.site.urls),
     re_path(r'^users/', include(('users.urls', 'users'), namespace='users')),
     re_path(r'^courses/', include(('courses.urls', 'courses'), namespace='courses')),
     re_path(r'^orgs/', include(('orgs.urls', 'orgs'), namespace='orgs')),
