@@ -18,6 +18,17 @@ from django.urls import path, include, re_path
 from .views import *
 
 urlpatterns = [
+     # 注册
      re_path(r'^user_register/$', user_register, name='user_register'),
-     re_path(r'^user_login/$', user_login, name='user_login')
+     # 登陆
+     re_path(r'^user_login/$', user_login, name='user_login'),
+     # 注销
+     re_path(r'user_logout/$',user_logout, name='user_logout'),
+     # 激活邮箱验证码
+     re_path(r'user_active/(\w+)/$', user_activate, name='user_activate'),
+     # 忘记密码
+     re_path(r'user_forget/$', user_forget, name='user_forget'),
+     # 激活邮箱验证码
+     re_path(r'user_reset/(\w+)/$', user_reset, name='user_reset'),
+
 ]

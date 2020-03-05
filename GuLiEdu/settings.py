@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'xadmin',
     'crispy_forms',
     'reversion',
+    'captcha'
 ]
 AUTH_USER_MODEL = 'users.UserProfile'
 
@@ -147,3 +148,10 @@ STATICFILES_DIRS = [
 # 媒体文件资源
 MEDIA_url = '/static/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+
+# 配置邮箱信息
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25  # 一把邮件默认的端口都是25
+EMAIL_HOST_USER = '15347229358@163.com'
+EMAIL_HOST_PASSWORD = 'jingang123456'
+EMAIL_FROM = '15347229358@163.com'
