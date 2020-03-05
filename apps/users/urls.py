@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from .views import *
 
 urlpatterns = [
-
+     re_path(r'^user_register/$', user_register, name='user_register'),
+     re_path(r'^user_login/$', user_login, name='user_login')
 ]
